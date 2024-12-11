@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+    id            String    @id @default(cuid())
+    email         String    @unique
+    firstName     String
+    lastName      String
+    password      String
+    role          Role      @default(USER)
+    isVerified    Boolean   @default(false)
+    otp           String?
+    otpExpiry     DateTime?
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+    speaker       Speaker?
+    bookings    Booking[]
+}
+
+model Speaker {
+    id              String     @id @default(cuid())
+    expertise       String[]
+    pricePerSession Float
+    bio             String?
+    userId          String     @unique
+    user            User       @relation(fields: [userId], references: [id])
+    timeSlots       TimeSlot[]
+    createdAt       DateTime   @default(now())
+    updatedAt       DateTime   @updatedAt
+}
+
+model TimeSlot {
+    id          String    @id @default(cuid())
+    startTime   DateTime
+    endTime     DateTime
+    isBooked    Boolean   @default(false)
+    speakerId   String
+    speaker     Speaker   @relation(fields: [speakerId], references: [id])
+    booking     Booking?
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+}
+model Booking {
+    id          String    @id @default(cuid())
+    userId      String
+    user        User      @relation(fields: [userId], references: [id])
+    timeSlotId  String    @unique
+    timeSlot    TimeSlot  @relation(fields: [timeSlotId], references: [id])
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+}
+
+enum Role {
+    USER
+    SPEAKER
+}
