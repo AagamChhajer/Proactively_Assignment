@@ -189,9 +189,9 @@ npm run dev
 3. Click the **Import** button.
 4. Paste the copied link and complete the import.
 
-### API Preview
+<!-- ### API Preview -->
 
-![Postman Preview](https://github.com/user-attachments/assets/4dd60de9-4f2d-4088-a2c7-3424a039b233)
+<!-- ![Postman Preview](https://github.com/user-attachments/assets/4dd60de9-4f2d-4088-a2c7-3424a039b233) -->
 
 ---
 
