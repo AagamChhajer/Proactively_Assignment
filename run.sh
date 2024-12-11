@@ -33,7 +33,7 @@ esac
 
 echo "📦 Selected package manager: $PM"
 
-cd backend
+cd backend_proactively
 $PM install
 $PX prisma generate
 
@@ -43,7 +43,7 @@ BACKEND_PID=$!
 $PX prisma studio &
 PRISMA_STUDIO_PID=$!
 
-cd ../frontend
+cd ../frontend_proactively
 $PM install
 
 $PM run dev &
