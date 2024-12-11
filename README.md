@@ -184,7 +184,7 @@ npm run dev
 
 ### Steps to Import the API Collection
 
-1. Copy the following JSON File ![](/aagamchhajer.json)
+1. Copy the following JSON File ![Json File](/aagamchhajer.json)
 2. Open **Postman**.
 3. Click the **Import** button.
 4. Paste the copied link and complete the import.
